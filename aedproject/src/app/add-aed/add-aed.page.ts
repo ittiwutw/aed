@@ -59,6 +59,7 @@ export class AddAedPage implements OnInit {
 
   addData() {
     const param = {
+      deviceId: '',
       deviceName: this.deviceName,
       deviceLocationName: this.deviceLocationName,
       deviceContact: this.deviceContact,
@@ -71,7 +72,10 @@ export class AddAedPage implements OnInit {
       longitude: this.longitude,
       subDistrictCode: this.subDistrictCode,
       districtCode: this.districtCode,
-      provinceCode: this.provinceCode
+      provinceCode: this.provinceCode,
+      status: 'ACTIVE',
+      alarmStatus: 'OFF',
+      count: 0
     };
     this.rest.addDevice(param).then((result: any) => {
       console.log(param);

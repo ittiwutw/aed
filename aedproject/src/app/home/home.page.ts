@@ -8,6 +8,8 @@ import { Storage } from '@ionic/storage';
 import { RestService } from '../services/rest.service';
 declare var google;
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { AlertController } from '@ionic/angular';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
   selector: 'app-home',
@@ -43,7 +45,9 @@ export class HomePage implements OnInit {
     private platform: Platform,
     public rest: RestService,
     public storage: Storage,
-    private geolocation: Geolocation
+    private geolocation: Geolocation,
+    private alertCtrl: AlertController,
+    private iab: InAppBrowser
   ) {
     this.getAllDevices();
 
@@ -224,7 +228,7 @@ export class HomePage implements OnInit {
     });
   }
 
-  getAllEvent(){
+  getAllEvent() {
     this.rest.getEventAll().then((result: any) => {
       console.log(result);
     });
@@ -305,7 +309,31 @@ export class HomePage implements OnInit {
   }
 
   markerClick(event, item) {
-    alert(item.deviceLocationName);
+    // alert(item.deviceLocationName + '\n' + item.deviceMark);
+    this.presentConfirm(item);
+  }
+
+  async presentConfirm(item) {
+    const alertCtr = await this.alertCtrl.create({
+      header: item.deviceLocationName,
+      message: item.deviceMark,
+      buttons: [
+        {
+          text: 'ยกเลิก',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'นำทาง',
+          handler: () => {
+            this.iab.create('https://www.google.com/maps/search/?api=1&query=' + item.latitude + ', ' + item.longitude);
+          }
+        }
+      ]
+    });
+    await alertCtr.present();
   }
 
 }

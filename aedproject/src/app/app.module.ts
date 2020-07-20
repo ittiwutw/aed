@@ -12,6 +12,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { HttpClientModule } from '@angular/common/http';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { AgmCoreModule } from '@agm/core';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 // import {fab} from '@fortawesome/free-brands-svg-icons';
 
 @NgModule({
@@ -31,6 +32,7 @@ import { AgmCoreModule } from '@agm/core';
     StatusBar,
     SplashScreen,
     Geolocation,
+    InAppBrowser,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
