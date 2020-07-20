@@ -65,7 +65,7 @@ export class AddAedPage implements OnInit {
       deviceContact: this.deviceContact,
       deviceDesc: this.deviceDesc,
       deviceMark: this.deviceMark,
-      devicePic: this.devicePic,
+      devicePic: '',
       deviceEui: this.deviceEui,
       deviceUuid: this.deviceUuid,
       latitude: this.latitude,
@@ -166,4 +166,20 @@ export class AddAedPage implements OnInit {
 
     // this.markers.push(marker);
   }
+
+  // pickImage() {
+  //   // this.completePayment();
+  //   const options: CameraOptions = {
+  //     quality: 100,
+  //     sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+  //     destinationType: this.camera.DestinationType.DATA_URL,
+  //     encodingType: this.camera.EncodingType.JPEG,
+  //     mediaType: this.camera.MediaType.PICTURE
+  //   };
+  //   this.camera.getPicture(options).then((imageData) => {
+  //     // base64
+  //   }, (err) => {
+  //     // Handle error
+  //   });
+  // }
 }
