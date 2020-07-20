@@ -1,0 +1,80 @@
+
+<ion-header [style.z-index]="step === 1 ? '100000' : '10'">
+  <ion-toolbar class="header">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Home
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="notificationPop()">การแจ้งเตือน</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<div style="color:white;z-index: 10000;position: absolute;background-color: black;height: 100vh;width: 100vw;opacity: 0.5;"  [style.display]="first && step !== undefined ? '':'none'">
+  <div [style.display]="step === 1 ? '':'none'" align="center" style="margin-top: 7vh;margin-left: -86vw">
+    <p><ion-icon name="arrow-up"></ion-icon></p>
+    <p>เมนู</p>
+  </div>
+  <div [style.display]="step === 2 ? '':'none'" align="center" style="margin-top: 73vh;margin-left: 5vw">
+    <p>กด 3 ครั้ง เพื่อขอความช่วยเหลือ</p>
+    <p><ion-icon name="arrow-down"></ion-icon></p>
+
+  </div>
+</div>
+<ion-content padding style="width: 100vw;height: 100vh;overflow: hidden;">
+  <agm-map
+    [style.height]="height"
+    [latitude]="currentLat"
+    [longitude]="currentLng"
+    [zoom]="zoom"
+  >
+    <!-- <agm-marker [latitude]="currentLat" [longitude]="currentLng"></agm-marker> -->
+    <agm-marker
+      *ngFor="let item of alldeviceList"
+      [latitude]="item.latitude"
+      [longitude]="item.longitude"
+    ></agm-marker>
+  </agm-map>
+  <ion-fab [style.display]="step !== undefined ? '':'none'" [style.z-index]="step ? '100000' : '10'" style="--background: transparent;"  vertical="center" horizontal="end" slot="fixed">
+    <ion-button (click)="nextStep()" style="--background: transparent;--box-shadow: none;">
+      {{ step == 1 ? 'ข้าม >>>':'เสร็จสิ้น >>>'}}
+    </ion-button>
+  </ion-fab>
+  <ion-fab [style.z-index]="step === 2 ? '100000' : '10'" [style.opacity]="SOS ? '0':'1'" [style.display]="role === 2 ? 'none':''" vertical="center" horizontal="center" style="margin-top: 30vh;">
+    <ion-fab-button (click)="sos()" style="right: 0;width:20vw;height: 10vh;" color="danger">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-icon name="heart"></ion-icon>
+            
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <b>SOS</b>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-card [style.opacity]="SOS ? '1':'0'" style="background-color:white !important;margin-left: -5vw;margin-top:75vh;width: 100vw;height:16vh;position: fixed;">
+    <ion-card-header>
+      <ion-card-title>
+        <button (click)="sos()" style="float: right;background-color: transparent;"><b>X</b></button>
+        
+      </ion-card-title>
+      <ion-card-subtitle>{{ this.AEDLocation }}</ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
+  <ion-card *ngIf="SOSHelp" style="background-color:white !important;margin-left: -5vw;margin-top:75vh;width: 100vw;height:16vh;position: fixed;">
+    <ion-card-header>
+      <ion-card-title>
+        <button style="float: right;background-color: transparent;"><b>X</b></button>
+       
+      </ion-card-title>
+    </ion-card-header>
+    <ion-button (click)="help()">นำทาง</ion-button>
+  </ion-card>
+</ion-content>

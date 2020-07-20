@@ -1,0 +1,64 @@
+
+<link href="https://fonts.googleapis.com/css?family=Kanit&display=swap" rel="stylesheet">
+
+
+<ion-content class="mycss1">
+  <ion-grid>
+    <ion-row>
+      <ion-col class="center">
+        <ion-img style="width: 100px; height: 100px;" src="../../assets/icon/AED_LOGO.png"></ion-img>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="titlecss">
+        <ion-label>FINDING AED</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-text-center" style="font-size: 20px">
+      <ion-col>
+        <ion-label class="labelcss">ค้นหาเครื่องกระตุ้นหัวใจ</ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-card class="logincardcss">
+    <!--    <div style="background-color:brown;">-->
+    <ion-col class="loginlabel center">
+      <ion-label>Login</ion-label>
+    </ion-col>
+    <ion-item>
+      <ion-label position="floating" class="inputcss">หมายเลขโทรศัพท์</ion-label>
+      <ion-input [(ngModel)]="mobileNo" placeholder="เบอร์โทรศัพท์" type="email" (keyup.enter)="login()"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" class="inputcss">รหัสผ่าน</ion-label>
+      <ion-input [(ngModel)]="password" placeholder="******" type="password" (keyup.enter)="login()"></ion-input>
+    </ion-item>
+    <!--    <ion-item>-->
+    <!--        <ion-label>Gender</ion-label>-->
+    <!--        <ion-select [(ngModel)]="gender">-->
+    <!--          <ion-select-option value="f">Female</ion-select-option>-->
+    <!--          <ion-select-option value="m">Male</ion-select-option>-->
+    <!--        </ion-select>-->
+    <!--    </ion-item>-->
+    <ion-col>
+      <a href="#" style="color: #989aa2">ลืมรหัสผ่าน?</a>
+    </ion-col>
+    <br><br/>
+    <ion-col class="center">
+      <ion-button (click)="login()" class="loginbuttoncss" expand="round" color="brown">เข้าสู่ระบบ
+      </ion-button>
+    </ion-col>
+    <a (click)="register()" style="color:brown" class="center">ลงทะเบียนผู้ใช้ใหม่!</a>
+    <br><br/>
+  </ion-card>
+</ion-content>
+
+
+
+
+<!--<ion-content>-->
+<!--หน้า Login-->
+<!--  <a href="/home">ไปหน้า home แบบ href</a>-->
+<!--  <ion-button (click)="goToHome()">ไปหน้า home แบบ function</ion-button>-->
+<!--</ion-content>-->
