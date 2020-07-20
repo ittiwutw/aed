@@ -59,7 +59,7 @@ export class AddAedPage implements OnInit {
 
   addData() {
     const param = {
-      deviceId: '',
+      deviceId: null,
       deviceName: this.deviceName,
       deviceLocationName: this.deviceLocationName,
       deviceContact: this.deviceContact,
