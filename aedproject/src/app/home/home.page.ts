@@ -54,9 +54,38 @@ export class HomePage implements OnInit {
     this.storage.get('userId').then(user => {
       this.userData = user;
       console.log(user);
+      if (user.userType === 'V') {
+        setTimeout(() => {
+          // somecode
+          this.presentAlert();
+        }, 30000);
+      }
     });
 
     // this.getAllEvent();
+  }
+
+  async presentAlert() {
+    const alertCtr = await this.alertCtrl.create({
+      header: 'แจ้งเตือนเหตุฉุกเฉิน',
+      message: 'กดเพื่อนำทาง',
+      buttons: [
+        {
+          text: 'ยกเลิก',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'นำทาง',
+          handler: () => {
+            this.iab.create('https://www.google.com/maps/search/?api=1&query=13.8601816,100.5128416');
+          }
+        }
+      ]
+    });
+    await alertCtr.present();
   }
 
   ngOnInit() {
