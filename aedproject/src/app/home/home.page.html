@@ -35,6 +35,7 @@
       *ngFor="let item of alldeviceList"
       [latitude]="item.latitude"
       [longitude]="item.longitude"
+      (markerClick)="markerClick($event, item)"
     ></agm-marker>
   </agm-map>
   <ion-fab [style.display]="step !== undefined ? '':'none'" [style.z-index]="step ? '100000' : '10'" style="--background: transparent;"  vertical="center" horizontal="end" slot="fixed">

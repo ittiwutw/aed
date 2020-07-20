@@ -36,6 +36,7 @@ export class HomePage implements OnInit {
   zoom = 13;
   currentLat = 13.7601366;
   currentLng = 100.5659859;
+  userData: any;
   constructor(
     public loadingCtrl: LoadingController,
     public toastCtrl: ToastController,
@@ -45,6 +46,13 @@ export class HomePage implements OnInit {
     private geolocation: Geolocation
   ) {
     this.getAllDevices();
+
+    this.storage.get('userId').then(user => {
+      this.userData = user;
+      console.log(user);
+    });
+
+    // this.getAllEvent();
   }
 
   ngOnInit() {
@@ -211,7 +219,13 @@ export class HomePage implements OnInit {
 
   createEvent() {
     console.log('get device');
-    this.rest.createEvent(32, this.currentPosition).then((result: any) => {
+    this.rest.createEvent(this.userData.userId, this.currentLat + '/' + this.currentLng).then((result: any) => {
+      console.log(result);
+    });
+  }
+
+  getAllEvent(){
+    this.rest.getEventAll().then((result: any) => {
       console.log(result);
     });
   }
@@ -288,6 +302,10 @@ export class HomePage implements OnInit {
     window.open('https://maps.google.com/?q=13.7551,100.4984', '_system');
     this.SOSHelp = false;
     this.step = 1;
+  }
+
+  markerClick(event, item) {
+    alert(item.deviceLocationName);
   }
 
 }

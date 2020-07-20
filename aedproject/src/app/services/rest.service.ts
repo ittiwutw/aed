@@ -146,6 +146,23 @@ export class RestService {
 
   }
 
+  getEventAll() {
+    return new Promise((resolve, reject) => {
+      const header = new HttpHeaders();
+      header.append('Content-type', 'json/data; charset=utf-8');
+
+      this.http.get(this.apiUrl + '/event/getEventAll')
+        .subscribe(res => {
+
+          // this.setUserLogin(res);
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+
+  }
+
   // getDeviceAll(param: any) {
   //   return new Promise((resolve, reject) => {
   //     const header = new HttpHeaders();
