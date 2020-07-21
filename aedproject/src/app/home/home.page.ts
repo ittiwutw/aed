@@ -139,10 +139,10 @@ export class HomePage implements OnInit {
       // distance = distance * 1;
       // var myLatlng = new this.map.
       // tslint:disable-next-line:radix
-      // if (parseInt(distance) <= 5) {
+      if (parseInt(distance) <= 5) {
         this.alldeviceList.push(device);
 
-      // }
+      }
     });
     // this.estates.forEach(element => {
 
