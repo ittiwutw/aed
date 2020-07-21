@@ -109,7 +109,7 @@ export class HomePage implements OnInit {
   }
 
   loadMap() {
-    this.addMarkersToMap();
+    // this.addMarkersToMap();
     this.geolocation.getCurrentPosition().then((resp) => {
       console.log(resp);
       this.lat = resp.coords.latitude;
