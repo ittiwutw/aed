@@ -57,7 +57,7 @@ export class HomePage implements OnInit {
       if (user.userType === 'V') {
         setTimeout(() => {
           // somecode
-          this.presentAlert();
+          // this.presentAlert();
         }, 30000);
       }
     });

@@ -79,7 +79,9 @@ export class AddAedPage implements OnInit {
     };
     this.rest.addDevice(param).then((result: any) => {
       console.log(param);
-      this.navCtrl.navigateRoot('/add-aed2').then();
+      alert('เพิ่มเครื่องสำเร็จ');
+      this.navCtrl.navigateRoot('/home').then();
+      // this.navCtrl.navigateRoot('/add-aed2').then();
     });
     // this.http.post(this.api_base_url + '/registerMachine', {
     //   addressDetail: this.addressDetail,
@@ -104,7 +106,8 @@ export class AddAedPage implements OnInit {
     //   });
   }
   goToStep2() {
-    this.navCtrl.navigateRoot('/add-aed2').then();
+    alert('เพิ่มเครื่องสำเร็จ');
+    this.navCtrl.navigateRoot('/home').then();
   }
 
   ionViewDidEnter() {
