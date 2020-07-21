@@ -12,7 +12,7 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<div style="color:white;z-index: 10000;position: absolute;background-color: black;height: 100vh;width: 100vw;opacity: 0.5;"  [style.display]="first && step !== undefined ? '':'none'">
+<!-- <div style="color:white;z-index: 10000;position: absolute;background-color: black;height: 100vh;width: 100vw;opacity: 0.5;"  [style.display]="first && step !== undefined ? '':'none'">
   <div [style.display]="step === 1 ? '':'none'" align="center" style="margin-top: 7vh;margin-left: -86vw">
     <p><ion-icon name="arrow-up"></ion-icon></p>
     <p>เมนู</p>
@@ -22,7 +22,7 @@
     <p><ion-icon name="arrow-down"></ion-icon></p>
 
   </div>
-</div>
+</div> -->
 <ion-content padding style="width: 100vw;height: 100vh;overflow: hidden;">
   <agm-map
     [style.height]="height"
@@ -38,11 +38,11 @@
       (markerClick)="markerClick($event, item)"
     ></agm-marker>
   </agm-map>
-  <ion-fab [style.display]="step !== undefined ? '':'none'" [style.z-index]="step ? '100000' : '10'" style="--background: transparent;"  vertical="center" horizontal="end" slot="fixed">
+  <!-- <ion-fab [style.display]="step !== undefined ? '':'none'" [style.z-index]="step ? '100000' : '10'" style="--background: transparent;"  vertical="center" horizontal="end" slot="fixed">
     <ion-button (click)="nextStep()" style="--background: transparent;--box-shadow: none;">
       {{ step == 1 ? 'ข้าม >>>':'เสร็จสิ้น >>>'}}
     </ion-button>
-  </ion-fab>
+  </ion-fab> -->
   <ion-fab [style.z-index]="step === 2 ? '100000' : '10'" [style.opacity]="SOS ? '0':'1'" [style.display]="role === 2 ? 'none':''" vertical="center" horizontal="center" style="margin-top: 30vh;">
     <ion-fab-button (click)="sos()" style="right: 0;width:20vw;height: 10vh;" color="danger">
       <ion-grid>

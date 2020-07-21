@@ -180,7 +180,7 @@ export class AppComponent implements OnInit {
 
     events.subscribe('user:login', () => {
       // user and time are the same arguments passed in `events.publish(user, time)`
-      alert('login');
+      // alert('login');
       // user and time are the same arguments passed in `events.publish(user, time)`
       this.storage.get('userId').then(user => {
         console.log(user);
