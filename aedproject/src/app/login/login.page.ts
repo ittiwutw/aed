@@ -36,19 +36,28 @@ export class LoginPage implements OnInit {
   }
   login() {
     // this.router.navigate(['/home']);
+
+    // เตรียม parameter สำหรับการ login
     const param = {
       mobileNo: this.mobileNo,
       password: this.password
     };
 
+    // เรียก REST API
     this.rest.login(param).then((result: any) => {
       // console.log(result);
+
+      // เช็ค response ถ้า respons status ไม่ใช่ 500 จะเข้าเงื่อนไข
       if (result.status !== '500') {
         // console.log(result.data.result[0]);
+
+        // เก็บ user data ไว้ใน storage ของเครื่อง ในชื่อ userId
         this.storage.set('userId', result).then(userId => {
           this.events.publish('user:login', {time: new Date()});
           console.log(result);
         });
+
+        // หลัง login ผ่าน ไปหน้า home
         this.router.navigate(['/home']);
       } else {
         console.log('cannot Login');

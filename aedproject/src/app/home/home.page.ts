@@ -49,17 +49,21 @@ export class HomePage implements OnInit {
     private alertCtrl: AlertController,
     private iab: InAppBrowser
   ) {
+
+    // หลังเข้าหน้า home จะเรียกคำสั่งดึงข้อมูลเครื่องทั้งหมด
     this.getAllDevices();
 
+
+    // ดึงข้อมูล user จาก storage
     this.storage.get('userId').then(user => {
       this.userData = user;
-      console.log(user);
-      if (user.userType === 'V') {
-        setTimeout(() => {
-          // somecode
-          // this.presentAlert();
-        }, 30000);
-      }
+      // console.log(user);
+      // if (user.userType === 'V') {
+      //   setTimeout(() => {
+      //     // somecode
+      //     // this.presentAlert();
+      //   }, 30000);
+      // }
     });
 
     // this.getAllEvent();
@@ -100,9 +104,15 @@ export class HomePage implements OnInit {
 
   getAllDevices() {
     console.log('get device');
+
+    // เรียก API ดึงข้อมูลเครื่อง
     this.rest.getDeviceAll().then((result: any) => {
       console.log(result);
+
+      // set ข้อมูลเครื่อง ลง alldevice
       this.alldevice = result;
+
+      // โหลดและ set googlemap
       this.loadMap();
 
     });
@@ -110,14 +120,26 @@ export class HomePage implements OnInit {
 
   loadMap() {
     // this.addMarkersToMap();
+
+    // ดึงที่อยู่ปัจจุบัน
     this.geolocation.getCurrentPosition().then((resp) => {
+
+      // ข้อมูลที่อยู่ปัจจุบัน
       console.log(resp);
+
+      // เก็บค่า latitude
       this.lat = resp.coords.latitude;
+      // เก็บค่า longtitude
       this.lng = resp.coords.longitude;
+      // เก็บค่า latitude
       this.currentLat = resp.coords.latitude;
+      // เก็บค่า longtitude
       this.currentLng = resp.coords.longitude;
+
+      // สร้าง object ตำแหน่งปัจจุบัน
       const latLng = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
 
+      // set Marker ลง google map
       this.addMarkersToMap();
 
       // this.addMarkersCurrentToMap(latLng);
@@ -128,18 +150,30 @@ export class HomePage implements OnInit {
   }
 
   addMarkersToMap() {
+
+    // วน loop เครื่องทั้งหมด
     this.alldevice.forEach(device => {
+
+      // สร้าง object ที่อยู่ปัจจุบัน
       const current = new google.maps.LatLng(this.currentLat, this.currentLng);
+      // สร้าง object ที่อยู่ของเครื่อง
       const target = new google.maps.LatLng(device.latitude, device.longitude);
+
+      // คำนวนระยะทางระหว่าง ที่อยู่ปัจจุบัน กับ ที่อยู่เครื่อง
+      // return เป็น เมตร
       const distanceMet = google.maps.geometry.spherical.computeDistanceBetween(current, target);
       console.log((distanceMet / 1000).toFixed(2));
 
-      // ระยะทางที่หาได้
+      // ระยะทางที่หาได้ แปลงเป็น กิโลเมตร
       const distance = (distanceMet / 1000).toFixed(2);
       // distance = distance * 1;
       // var myLatlng = new this.map.
       // tslint:disable-next-line:radix
+
+      // เช๋็คถ้าระยะทางน้อยกว่าเท่ากับ 5 กิโล
       if (parseInt(distance) <= 5) {
+
+        // set เครื่องลง alldeviceList สำหรับทำ marker
         this.alldeviceList.push(device);
 
       }
@@ -357,6 +391,8 @@ export class HomePage implements OnInit {
         {
           text: 'นำทาง',
           handler: () => {
+
+            // กดนำทาง จะเรียก url ใน google maps url format และส่ง ตำแหน่งเพื่อเปิดแอพ google maps
             this.iab.create('https://www.google.com/maps/search/?api=1&query=' + item.latitude + ', ' + item.longitude);
           }
         }

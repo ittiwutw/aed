@@ -15,13 +15,18 @@ export class RestService {
 
   login(param: any) {
     return new Promise((resolve, reject) => {
+
+      // สร้าง Header สำหรับยิง api
       const header = new HttpHeaders();
       header.append('Content-type', 'json/data; charset=utf-8');
 
+      // เรียก rest API โดยรับ parameter ส่งไปพร้อม rest API
       this.http.get(this.apiUrl + '/user/login' + '/' + param.mobileNo + '/' + param.password)
         .subscribe(res => {
 
           // this.setUserLogin(res);
+
+          // ข้อมูลจาก REST API จะอยู่ใน parameter res และส่งต่อไปยัง function ที่เรียก
           resolve(res);
         }, (err) => {
           reject(err);
